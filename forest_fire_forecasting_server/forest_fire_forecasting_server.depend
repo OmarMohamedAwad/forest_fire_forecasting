@@ -6,11 +6,25 @@
 
 1662121654 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensor.h
 
-1662121717 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
+1662136078 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
 	<iostream>
 	"limits.h"
 	"TemperatureSensor.h"
 	"NetworkServer.h"
+	"SocketConnection.h"
 
-1662121707 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/NetworkServer.h
+1662135984 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/NetworkServer.h
+
+1662136234 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/NetworkServer.cpp
+	"NetworkServer.h"
+	"SocketConnection.h"
+	<iostream>
+
+1662136202 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
+	"SocketConnection.h"
+	"NetworkServer.h"
+	<iostream>
+
+1662135998 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/SocketConnection.h
+	"NetworkServer.h"
 

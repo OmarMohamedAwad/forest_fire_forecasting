@@ -1,15 +1,11 @@
 #include "NetworkServer.h"
+#include "SocketConnection.h"
+#include <iostream>
 
-   NetworkServer *NetworkServer::instance = nullptr;
+   // NetworkServer *NetworkServer::instance = nullptr;
 
-   NetworkServer::NetworkServer() {
-      payload = 0;
-   }
-
-    NetworkServer* NetworkServer::getInestance() {
-      if (!instance)
-        instance = new NetworkServer;
-      return instance;
+   NetworkServer::NetworkServer(){
+        std::cout << "NetworkServer"<< std::endl;
    }
 
    float NetworkServer::getPayload() {
