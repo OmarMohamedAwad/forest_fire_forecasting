@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1662121574 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensor.cpp
+	"TemperatureSensor.h"
+	"limits.h"
+	<cstdlib>
+
+1662121654 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensor.h
+
+1662121717 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
+	<iostream>
+	"limits.h"
+	"TemperatureSensor.h"
+	"NetworkServer.h"
+
+1662121707 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/NetworkServer.h
+
