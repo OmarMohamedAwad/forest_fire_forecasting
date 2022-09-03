@@ -13,6 +13,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-pthread" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +35,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="forest_fire_forecasting_server.depend" />
+		<Unit filename="include/NetworkServer.h" />
+		<Unit filename="include/SocketConnection.h" />
+		<Unit filename="include/TemperatureSensor.h" />
+		<Unit filename="main.cpp">
+			<Option compiler="gcc" use="1" buildCommand="g++ main.cpp -o main -pthread" />
+		</Unit>
+		<Unit filename="src/NetworkServer.cpp" />
+		<Unit filename="src/SocketConnection.cpp" />
+		<Unit filename="src/TemperatureSensor.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

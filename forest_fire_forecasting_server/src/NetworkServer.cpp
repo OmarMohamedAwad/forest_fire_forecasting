@@ -2,10 +2,7 @@
 #include "SocketConnection.h"
 #include <iostream>
 
-   // NetworkServer *NetworkServer::instance = nullptr;
-
    NetworkServer::NetworkServer(){
-        std::cout << "NetworkServer"<< std::endl;
    }
 
    float NetworkServer::getPayload() {

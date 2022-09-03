@@ -1,9 +1,11 @@
 #include "TemperatureSensor.h"
 #include "limits.h"
 #include <cstdlib>
+#include <iostream>
 
     TemperatureSensor::TemperatureSensor(){
         temperatureCounter = 0;
+        celsiusTemperature = 0.0;
     }
 
     float TemperatureSensor::getTemperature(){
@@ -15,7 +17,8 @@
             celsiusTemperature = (newTemperaturReading + (celsiusTemperature)) /  2;
             temperatureCounter = 2;
         }else{
-            celsiusTemperature = (newTemperaturReading + (temperatureCounter * celsiusTemperature)) / temperatureCounter + 1;
+            celsiusTemperature = (newTemperaturReading + (static_cast<long>(temperatureCounter) * celsiusTemperature)) / (temperatureCounter + 1);
             temperatureCounter++;
         }
+
     }
