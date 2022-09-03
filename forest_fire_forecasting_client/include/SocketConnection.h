@@ -1,15 +1,22 @@
 #ifndef SOCKETCONNECTION_H
 #define SOCKETCONNECTION_H
-#include "NetworkServer.h"
+#include "NetworkClient.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-class SocketConnection : public NetworkServer {
+class SocketConnection : public NetworkClient {
     public:
         static SocketConnection* getInestance();
         virtual bool establishConnection();
+        bool serverResponse();
+        string getServerChannel();
+        string getServerIp();
+        int getServerPort();
+        void setServerChannel(string channel);
+        void setServerPort(int port);
+        void setServerIp(string ip);
 
     protected:
 
@@ -17,6 +24,9 @@ class SocketConnection : public NetworkServer {
         string channel;
         int socketPort;
         string socketIp;
+        string serverChannel;
+        int serverPort;
+        string serverIp;
         SocketConnection();
         static SocketConnection *instance;
         void parseNetworkData(string handCheckData);

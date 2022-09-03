@@ -6,11 +6,12 @@
 #include <map>
 #include <string>
 #include <thread>
+#include <mutex>
 #include <chrono>
 #include <condition_variable>
 #include <utility>
 #include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
-#include <mutex>
+#define SERIAL_NUMBER "26.88.67.11"
 
 using namespace std;
 using namespace masesk;
@@ -26,24 +27,25 @@ int main()
     map<string, string> clientsData;
 
     TemperatureSensor temperatureSensor = TemperatureSensor();
-    //NetworkServer* network = network->getInestance("Socket");
-
     SocketConnection* socketConnection = socketConnection->getInestance();
 
     thread sendDataToClientsThread([&]() {
         float temp;
-
+        string payload;
         mutex mtx;
         unique_lock<mutex> lck(mtx);
 
         EasySocket socketManager;
         while(true){
             temp = temperatureSensor.getTemperature();
+            payload = "Serial:";
+            payload = payload.append(SERIAL_NUMBER).append(",Temperature:").append(to_string(temp));
+
             cout << "in while" << endl;
             for (auto element :clientsData){
                 pair<string,string> parsedElement = parseNetworkElement(element.second);
                 socketManager.socketConnect(element.first, parsedElement.first, stoi(parsedElement.second));
-                socketManager.socketSend(element.first, to_string(temp));
+                socketManager.socketSend(element.first, payload);
                 socketManager.closeConnection(element.first);
             }
             cv.wait_for(lck,chrono::seconds(1));
@@ -68,7 +70,7 @@ int main()
 
     while(true){
         if(socketConnection->establishConnection()){
-            clientsData.insert({socketConnection->getKey(), socketConnection->getValue()});
+            clientsData.insert({socketConnection->getPayloadKey(), socketConnection->getPayloadValue()});
         }
     }
 

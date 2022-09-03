@@ -1,14 +1,21 @@
 #include "NetworkServer.h"
-#include "SocketConnection.h"
 #include <iostream>
 
    NetworkServer::NetworkServer(){
    }
 
-   float NetworkServer::getPayload() {
-      return payload;
+   string NetworkServer::getPayloadKey() {
+      return payloadKey;
    }
 
-   void NetworkServer::setPayload(float payload) {
-        this->payload = payload;
+   string NetworkServer::getPayloadValue() {
+      return payloadValue;
+   }
+
+   void NetworkServer::setPayloadKey(string key) {
+        this->payloadKey = key;
+   }
+
+   void NetworkServer::setPayloadValue(string value) {
+        this->payloadValue = value;
    }

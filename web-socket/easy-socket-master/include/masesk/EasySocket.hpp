@@ -48,7 +48,6 @@ namespace masesk {
 	class EasySocket {
 	public:
 		void socketListen(const std::string &channelName, int port, std::function<void (std::string &appBuffer, const std::string &data)> callback, std::string &appBuffer) {
-
 			if (sockInit() != 0) {
 				throw masesk::socket_error_exception();
 			}
