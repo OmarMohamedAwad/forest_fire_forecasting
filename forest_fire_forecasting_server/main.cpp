@@ -11,7 +11,7 @@
 #include <condition_variable>
 #include <utility>
 #include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
-#define SERIAL_NUMBER "26.88.67.11"
+#define SERIAL_NUMBER "29.88.67.12"
 
 using namespace std;
 using namespace masesk;
@@ -42,11 +42,17 @@ int main()
             payload = payload.append(SERIAL_NUMBER).append(",Temperature:").append(to_string(temp));
 
             cout << "in while" << endl;
-            for (auto element :clientsData){
-                pair<string,string> parsedElement = parseNetworkElement(element.second);
-                socketManager.socketConnect(element.first, parsedElement.first, stoi(parsedElement.second));
-                socketManager.socketSend(element.first, payload);
-                socketManager.closeConnection(element.first);
+            for (auto it = clientsData.cbegin(); it != clientsData.cend() /* not hoisted */; ){
+                pair<string,string> parsedElement = parseNetworkElement(it->second);
+                try{
+                    socketManager.socketConnect(it->first, parsedElement.first, stoi(parsedElement.second));
+                    socketManager.socketSend(it->first, payload);
+                    socketManager.closeConnection(it->first);
+                    ++it;
+                }catch (...){
+                    socketManager.closeConnection(it->first);
+                    clientsData.erase(it++);
+                }
             }
             cv.wait_for(lck,chrono::seconds(1));
         }

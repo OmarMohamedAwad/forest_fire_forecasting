@@ -26,7 +26,13 @@ using namespace std;
 
     void TemperatureNode::setTemperature(float celsiusTemperature){
         this->celsiusTemperature = celsiusTemperature;
+        setTempertureTimestamp();
         updateNodeTemperatureArray();
+    }
+
+    void TemperatureNode::setTempertureTimestamp(){
+        time_t now = time(0);
+        this->temperatureTimeStamp = *gmtime(&now);
     }
 
     void TemperatureNode::updateNodeTemperatureArray(){
@@ -49,8 +55,21 @@ using namespace std;
 
     float TemperatureNode::calculateAccumelatedTemperatureAverages(vector<TemperatureNode> &nodes){
         float totalSum = 0;
-        for (TemperatureNode item : nodes)
-            totalSum += item.averageTemperature;
+        int validNode = 0;
+        for (TemperatureNode item : nodes){
+            if(comparTimestampWithNow(item.temperatureTimeStamp)){
+                validNode++;
+                totalSum += item.averageTemperature;
+            }
+        }
 
-        return totalSum / nodes.size();
+        return totalSum / validNode;
+    }
+
+    bool TemperatureNode::comparTimestampWithNow(tm temperatureTimestamp){
+        time_t now = time(0);
+        tm currentTimeStamp = *gmtime(&now);
+
+        if(difftime(timegm(&currentTimeStamp), timegm(&temperatureTimestamp)) > 15) return false;
+        return true;
     }

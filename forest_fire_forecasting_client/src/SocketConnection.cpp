@@ -4,9 +4,9 @@
 #include <string>
 #include <utility>
 #include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
-#define CLIENT_CHANNEL "117"
-#define CLIENT_ID "117"
-#define CLIENT_PORT 8030
+#define CLIENT_CHANNEL "118"
+#define CLIENT_ID "118"
+#define CLIENT_PORT 8040
 #define CLIENT_IP "127.0.0.1"
 
 using namespace std;
@@ -49,6 +49,7 @@ bool SocketConnection::establishConnection(){
     }catch (string error){
         return false;
     }catch(...){
+        cout << "catched establish issue" << endl;
         return false;
     }
 }

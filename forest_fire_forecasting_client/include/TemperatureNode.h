@@ -3,6 +3,7 @@
 #define READING_COUNT 5
 #include <string>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 
@@ -18,7 +19,9 @@ class TemperatureNode
         void calculateAverageTemperature();
         string getTempertureNodeId();
         void setTempertureNodeId(string nodeId);
+        void setTempertureTimestamp();
         static float calculateAccumelatedTemperatureAverages(vector<TemperatureNode> &nodes);
+        static bool comparTimestampWithNow(tm temperatureTimestamp);
 
     protected:
 
@@ -28,6 +31,7 @@ class TemperatureNode
         int currentReadingIndex;
         float averageTemperature;
         string temperatureNodeId;
+        tm temperatureTimeStamp;
 };
 
 #endif // TEMPERATURENODE_H

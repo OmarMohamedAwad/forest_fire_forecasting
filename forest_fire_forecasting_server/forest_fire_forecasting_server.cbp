@@ -12,10 +12,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-pthread" />
 					<Add directory="include" />
 				</Compiler>
+				<Linker>
+					<Add option="-Wl,--no-as-needed" />
+					<Add option="-pthread" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/forest_fire_forecasting_server" prefix_auto="1" extension_auto="1" />
@@ -40,7 +45,7 @@
 		<Unit filename="include/SocketConnection.h" />
 		<Unit filename="include/TemperatureSensor.h" />
 		<Unit filename="main.cpp">
-			<Option compiler="gcc" use="1" buildCommand="g++ main.cpp -o main -pthread" />
+			<Option compiler="gcc" use="0" buildCommand="g++ main.cpp -o main -pthread" />
 		</Unit>
 		<Unit filename="src/NetworkServer.cpp" />
 		<Unit filename="src/SocketConnection.cpp" />

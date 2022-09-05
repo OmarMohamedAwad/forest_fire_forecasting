@@ -7,7 +7,7 @@
 
 1662211557 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensor.h
 
-1662244459 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
+1662327518 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
 	<iostream>
 	"limits.h"
 	"TemperatureSensor.h"
@@ -29,7 +29,7 @@
 	"NetworkServer.h"
 	<iostream>
 
-1662244453 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
+1662327511 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
 	"SocketConnection.h"
 	"NetworkServer.h"
 	<iostream>
@@ -74,7 +74,7 @@
 
 1662155193 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/anyC.h
 
-1662234322 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
+1662331092 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
 	<winsock2.h>
 	<Ws2tcpip.h>
 	<sys/socket.h>

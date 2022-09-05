@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1662246675 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/main.cpp
+1662336863 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/main.cpp
 	<iostream>
 	"TemperatureNode.h"
 	"NetworkClient.h"
@@ -18,17 +18,18 @@
 	<map>
 	<string>
 
-1662246447 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/TemperatureNode.cpp
+1662331361 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/TemperatureNode.cpp
 	"TemperatureNode.h"
 	"limits.h"
 	<cstdlib>
 	<iostream>
 
-1662245690 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/TemperatureNode.h
+1662336119 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/TemperatureNode.h
 	<string>
 	<vector>
+	<ctime>
 
-1662242689 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/SocketConnection.cpp
+1662320903 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/SocketConnection.cpp
 	"SocketConnection.h"
 	"NetworkClient.h"
 	<iostream>
@@ -36,12 +37,12 @@
 	<utility>
 	"../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
 
-1662237074 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/SocketConnection.h
+1662316340 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/SocketConnection.h
 	"NetworkClient.h"
 	<iostream>
 	<string>
 
-1662234322 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
+1662331092 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
 	<winsock2.h>
 	<Ws2tcpip.h>
 	<sys/socket.h>

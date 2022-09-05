@@ -14,23 +14,16 @@
 using namespace std;
 std::condition_variable cv;
 
+void nodeConnectionHandler(string channel, string ip, int port);
+
 int main()
 {
     vector<TemperatureNode> nodes;
     mutex mtx;
-
     SocketConnection *socketConnection = socketConnection->getInestance();
-    socketConnection->setServerChannel("brodcast");
-    socketConnection->setServerIp("127.0.0.1");
-    socketConnection->setServerPort(8010);
 
-    socketConnection->establishConnection();
-
-    socketConnection->setServerChannel("brodcast2");
-    socketConnection->setServerIp("127.0.0.1");
-    socketConnection->setServerPort(8020);
-
-    socketConnection->establishConnection();
+    thread nodeThread1(nodeConnectionHandler, "brodcast", "127.0.0.1", 8010);
+    thread nodeThread2(nodeConnectionHandler, "brodcast2", "127.0.0.1", 8020);
 
     thread calculateTemperetureAvgThread([&]() {
         unique_lock<mutex> lck(mtx);
@@ -64,24 +57,45 @@ int main()
         string payloadIdentifire = responsPayload[IDENTIFIRE];
         bool isNodeFound = false;
         int sizeOfNodes = nodes.size();
-
         for(int i = 0; i < sizeOfNodes; i++){
             if(nodes[i].getTempertureNodeId() == payloadIdentifire){
                 isNodeFound = true;
                 nodes[i].setTemperature(atof(responsPayload[ATTRIBUTE].c_str()));
             }
+
         }
 
         if(!isNodeFound) {
             TemperatureNode newNode;
             newNode.setTempertureNodeId(responsPayload[IDENTIFIRE]);
             newNode.setTemperature(atof(responsPayload[ATTRIBUTE].c_str()));
+
             nodes.push_back(newNode);
         }
     }
 
+    nodeThread1.join();
+    nodeThread2.join();
     calculateTemperetureAvgThread.join();
     calculateAccumelatedTemperetureAvgThread.join();
 
     return 0;
+}
+
+void nodeConnectionHandler(string channel, string ip, int port) {
+    mutex mtx;
+    unique_lock<mutex> lck(mtx);
+    SocketConnection *socketConnection = socketConnection->getInestance();
+    socketConnection->setServerChannel(channel);
+    socketConnection->setServerIp(ip);
+    socketConnection->setServerPort(port);
+
+    int triersFlag = 0;
+    while(triersFlag < 5){
+        if(!socketConnection->establishConnection()){
+            triersFlag++;
+            cv.wait_for(lck,chrono::seconds(5));
+        }else break;
+    }
+    if(triersFlag == 5) cout << "The node with channel name : " << channel << " and ip with port : "<< ip << ":" << port << " is not available now" << endl;
 }
