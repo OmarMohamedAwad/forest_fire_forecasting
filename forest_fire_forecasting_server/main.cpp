@@ -3,6 +3,8 @@
 #include "TemperatureSensor.h"
 #include "NetworkServer.h"
 #include "SocketConnection.h"
+#include "IParser.h"
+#include "RawDataParser.h"
 #include <map>
 #include <string>
 #include <thread>
@@ -10,24 +12,25 @@
 #include <chrono>
 #include <condition_variable>
 #include <utility>
-#include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
+#include <gtest/gtest.h>
 #define SERIAL_NUMBER "29.88.67.12"
 
 using namespace std;
-using namespace masesk;
 
 std::condition_variable cv;
 
 
 pair<string,string> parseNetworkElement(string networkData);
-float generateRandomNumber(int minReng, int maxReng);
 
-int main()
+
+int main(int argc, char **argv)
 {
+    testing::InitGoogleTest(&argc, argv);
     map<string, string> clientsData;
 
     TemperatureSensor temperatureSensor = TemperatureSensor();
     SocketConnection* socketConnection = socketConnection->getInestance();
+    RawDataParser* parser = new RawDataParser();
 
     thread sendDataToClientsThread([&]() {
         float temp;
@@ -35,53 +38,38 @@ int main()
         mutex mtx;
         unique_lock<mutex> lck(mtx);
 
-        EasySocket socketManager;
         while(true){
             temp = temperatureSensor.getTemperature();
+            // TODO: Payload Formater
             payload = "Serial:";
             payload = payload.append(SERIAL_NUMBER).append(",Temperature:").append(to_string(temp));
 
             cout << "in while" << endl;
-            for (auto it = clientsData.cbegin(); it != clientsData.cend() /* not hoisted */; ){
-                pair<string,string> parsedElement = parseNetworkElement(it->second);
-                try{
-                    socketManager.socketConnect(it->first, parsedElement.first, stoi(parsedElement.second));
-                    socketManager.socketSend(it->first, payload);
-                    socketManager.closeConnection(it->first);
+            for (auto it = clientsData.cbegin(); it != clientsData.cend(); ){
+                pair<string,string> parsedElement = parser->parseRawDataToPair(":",it->second);
+                if(socketConnection->sendPayload(4, it->first, parsedElement.first, parsedElement.second, payload))
                     ++it;
-                }catch (...){
-                    socketManager.closeConnection(it->first);
+                else
                     clientsData.erase(it++);
-                }
             }
             cv.wait_for(lck,chrono::seconds(1));
         }
 
     });
 
-
-    thread sendTemperature([&]() {
-        float newTemp;
-        mutex mtx;
-        unique_lock<mutex> lck(mtx);
-
-        while(true){
-            newTemp = generateRandomNumber(30,40);
-            temperatureSensor.setTemperature(newTemp);
-            cv.wait_for(lck,chrono::seconds(1));
-        }
-
-    });
-
+    thread setTemperaturePeriodically(&TemperatureSensor::setTemperaturePeriodically, &temperatureSensor);
 
     while(true){
         if(socketConnection->establishConnection()){
-            clientsData.insert({socketConnection->getPayloadKey(), socketConnection->getPayloadValue()});
+            pair<string, string> socketDataPair =  parser->parseRawDataToPair(",", socketConnection->getData());
+            clientsData.insert({socketDataPair.first, socketDataPair.second});
         }
     }
 
-    sendTemperature.join();
+    setTemperaturePeriodically.join();
     sendDataToClientsThread.join();
+
+    return RUN_ALL_TESTS();
 }
 
 pair<string,string> parseNetworkElement(string networkData) {
@@ -94,8 +82,4 @@ pair<string,string> parseNetworkElement(string networkData) {
     networkDataPair.second = networkData.substr(delimLocation + 1, networkData.length());
 
     return networkDataPair;
-}
-
-float generateRandomNumber(int minReng, int maxReng){
-    return minReng + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(maxReng-minReng)));
 }

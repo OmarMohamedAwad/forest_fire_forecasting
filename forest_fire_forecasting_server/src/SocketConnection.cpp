@@ -1,12 +1,5 @@
 #include "SocketConnection.h"
-#include "NetworkServer.h"
-#include <iostream>
-#include <string>
-#include <utility>
-#include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
 
-
-using namespace std;
 using namespace masesk;
 
 SocketConnection *SocketConnection::instance = nullptr;
@@ -33,7 +26,7 @@ bool SocketConnection::establishConnection(){
     string handCheckData = "";
     try{
         socketManager.socketListen(channel, socketPort, &handleData, handCheckData);
-        parseNetworkData(handCheckData);
+        setData(handCheckData);
         return true;
     }catch (string error){
         return false;
@@ -42,9 +35,29 @@ bool SocketConnection::establishConnection(){
     }
 }
 
-void SocketConnection::parseNetworkData(string handCheckData){
-    string delim = ",";
-    int delimLocation = handCheckData.find(delim);
-    setPayloadKey(handCheckData.substr(0, delimLocation));
-    setPayloadValue(handCheckData.substr(delimLocation + 1, handCheckData.length()));
+bool SocketConnection::sendPayload(int count, ...){
+
+    va_list list;
+    va_start(list, count);
+
+    string clientChannel, clientIp, clientPort, clientPayload;
+
+    EasySocket socketManager;
+    try{
+        if(count == 4){
+            clientChannel = va_arg(list, string);
+            clientIp = va_arg(list, string);
+            clientPort = va_arg(list, string);
+            clientPayload = va_arg(list, string);
+        }
+        va_end(list);
+
+        socketManager.socketConnect(clientChannel, clientIp, stoi(clientPort));
+        socketManager.socketSend(clientChannel, clientPayload);
+        socketManager.closeConnection(clientChannel);
+        return true;
+    }catch (...){
+        socketManager.closeConnection(clientChannel);
+        return false;
+    }
 }

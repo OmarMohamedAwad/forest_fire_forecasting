@@ -54,6 +54,7 @@ int main()
     while(true){
         socketConnection->serverResponse();
         map<string, string> responsPayload = socketConnection->getPayload();
+        cout << "responsPayload" << responsPayload[ATTRIBUTE] << endl;
         string payloadIdentifire = responsPayload[IDENTIFIRE];
         bool isNodeFound = false;
         int sizeOfNodes = nodes.size();

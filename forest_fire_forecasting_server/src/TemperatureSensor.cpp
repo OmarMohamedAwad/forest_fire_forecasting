@@ -1,7 +1,4 @@
 #include "TemperatureSensor.h"
-#include "limits.h"
-#include <cstdlib>
-#include <iostream>
 
     TemperatureSensor::TemperatureSensor(){
         temperatureCounter = 0;
@@ -13,14 +10,23 @@
     }
 
     void TemperatureSensor::setTemperature(float newTemperaturReading){
-        /*if (temperatureCounter == INT_MAX){
-            celsiusTemperature = (newTemperaturReading + (celsiusTemperature)) /  2;
-            temperatureCounter = 2;
-        }else{
-            celsiusTemperature = (newTemperaturReading + (static_cast<long>(temperatureCounter) * celsiusTemperature)) / (temperatureCounter + 1);
-            temperatureCounter++;
-        }*/
-
         this->celsiusTemperature = newTemperaturReading;
+    }
 
+    float TemperatureSensor::generateTemperature(int minReng, int maxReng){
+        return minReng + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(maxReng-minReng)));
+    }
+
+    void TemperatureSensor::setTemperaturePeriodically(){
+        condition_variable cv;
+
+        float newTemp;
+        mutex mtx;
+        unique_lock<mutex> lck(mtx);
+
+        while(true){
+            newTemp = generateTemperature(30,40);
+            setTemperature(newTemp);
+            cv.wait_for(lck,chrono::seconds(1));
+        }
     }

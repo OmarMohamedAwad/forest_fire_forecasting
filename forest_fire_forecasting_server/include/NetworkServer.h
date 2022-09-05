@@ -1,5 +1,6 @@
 #ifndef NETWORKSERVER_H
 #define NETWORKSERVER_H
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -8,15 +9,13 @@ class NetworkServer
 {
      public:
         NetworkServer();
+        string getData();
+        void setData(string data);
         virtual bool establishConnection() = 0;
-        string getPayloadKey();
-        string getPayloadValue();
-        void setPayloadKey(string key);
-        void setPayloadValue(string value);
+        virtual bool sendPayload(int count, ...) = 0;
 
     protected:
-        string payloadKey;
-        string payloadValue;
+        string payloadData;
 
     private:
 
