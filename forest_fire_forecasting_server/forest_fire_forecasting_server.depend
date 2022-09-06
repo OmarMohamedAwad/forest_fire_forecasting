@@ -112,9 +112,10 @@
 	<vector>
 	"IParser.h"
 
-1662496108 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensorTest.cpp
+1662498632 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensorTest.cpp
 	"TemperatureSensorTest.h"
-	<gtest/gtest.h>
 
-1662495910 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensorTest.h
+1662498214 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensorTest.h
+	<gtest/gtest.h>
+	"TemperatureSensor.h"
 

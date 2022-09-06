@@ -14,8 +14,8 @@
                 totalSum += item.getAverageTemperature();
             }
         }
-
-        return totalSum / validNode;
+        float accumulatedAverage = (totalSum / validNode) > 0.0 ? (totalSum / validNode) : 0.0;
+        return accumulatedAverage;
     }
 
     bool ApplicationHelper::comparTimestamp(tm timestamp){

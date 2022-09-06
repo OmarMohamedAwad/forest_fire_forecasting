@@ -14,9 +14,9 @@
 #include <utility>
 #include <gtest/gtest.h>
 #define SERIAL_NUMBER "29.88.67.11"
+#define TEST_OR_BUILD 1// 1 for Test - 0 for build
 
 using namespace std;
-#define TEST_OR_BUILD 1// 1 for Test - 0 for build
 
 std::condition_variable cv;
 

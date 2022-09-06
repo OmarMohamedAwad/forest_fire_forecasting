@@ -9,7 +9,9 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include <gtest/gtest.h>
 #include <condition_variable>
+#define TEST_OR_BUILD 1// 1 for Test - 0 for build
 
 
 #define IDENTIFIRE "Serial"
@@ -18,8 +20,14 @@
 using namespace std;
 std::condition_variable cv;
 
-int main()
+int main(int argc, char **argv)
 {
+
+    #if TEST_OR_BUILD
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+    #else
+    map<string, string> clientsData;
     vector<TemperatureNode> nodes;
     mutex mtx;
     IParser *parser = new RawDataParser();
@@ -83,6 +91,7 @@ int main()
     calculateTemperetureAvgThread.join();
     calculateAccumelatedTemperetureAvgThread.join();
 
-    return 0;
+    #endif // TEST_OR_BUILD
+
 }
 
