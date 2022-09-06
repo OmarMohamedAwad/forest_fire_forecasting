@@ -16,13 +16,17 @@
 #define SERIAL_NUMBER "29.88.67.11"
 
 using namespace std;
+#define TEST_OR_BUILD 1// 1 for Test - 0 for build
 
 std::condition_variable cv;
 
 
 int main(int argc, char **argv)
 {
+    #if TEST_OR_BUILD
     testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+    #else
     map<string, string> clientsData;
 
     TemperatureSensor temperatureSensor = TemperatureSensor();
@@ -65,18 +69,5 @@ int main(int argc, char **argv)
 
     setTemperaturePeriodically.join();
     sendDataToClientsThread.join();
-
-    return RUN_ALL_TESTS();
-}
-
-pair<string,string> parseNetworkElement(string networkData) {
-    string delim = ":";
-    int delimLocation = networkData.find (delim);
-
-    pair<string,string> networkDataPair;
-
-    networkDataPair.first = networkData.substr(0, delimLocation);
-    networkDataPair.second = networkData.substr(delimLocation + 1, networkData.length());
-
-    return networkDataPair;
+    #endif // TEST_OR_BUILD
 }

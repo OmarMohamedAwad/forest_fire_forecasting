@@ -11,7 +11,7 @@
 	<chrono>
 	<condition_variable>
 
-1662483527 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
+1662498367 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
 	<iostream>
 	"limits.h"
 	"TemperatureSensor.h"
@@ -35,7 +35,7 @@
 1662420380 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/NetworkServer.cpp
 	"NetworkServer.h"
 
-1662486928 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
+1662494036 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
 	"SocketConnection.h"
 
 1662420466 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/SocketConnection.h
@@ -78,7 +78,7 @@
 
 1662155193 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/anyC.h
 
-1662404859 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
+1662493823 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
 	<winsock2.h>
 	<Ws2tcpip.h>
 	<sys/socket.h>
@@ -111,4 +111,10 @@
 	<string>
 	<vector>
 	"IParser.h"
+
+1662496108 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensorTest.cpp
+	"TemperatureSensorTest.h"
+	<gtest/gtest.h>
+
+1662495910 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensorTest.h
 
