@@ -2,11 +2,15 @@
 #include "TemperatureNode.h"
 #include "NetworkClient.h"
 #include "SocketConnection.h"
+#include "IParser.h"
+#include "RawDataParser.h"
+#include "ApplicationHelper.h"
 #include <vector>
 #include <thread>
 #include <mutex>
 #include <chrono>
 #include <condition_variable>
+
 
 #define IDENTIFIRE "Serial"
 #define ATTRIBUTE "Temperature"
@@ -14,16 +18,15 @@
 using namespace std;
 std::condition_variable cv;
 
-void nodeConnectionHandler(string channel, string ip, int port);
-
 int main()
 {
     vector<TemperatureNode> nodes;
     mutex mtx;
+    IParser *parser = new RawDataParser();
     SocketConnection *socketConnection = socketConnection->getInestance();
 
-    thread nodeThread1(nodeConnectionHandler, "brodcast", "127.0.0.1", 8010);
-    thread nodeThread2(nodeConnectionHandler, "brodcast2", "127.0.0.1", 8020);
+    thread nodeThread1(&SocketConnection::handelConnection, socketConnection,"brodcast", "127.0.0.1", 8010);
+    thread nodeThread2(&SocketConnection::handelConnection, socketConnection, "brodcast2", "127.0.0.1", 8020);
 
     thread calculateTemperetureAvgThread([&]() {
         unique_lock<mutex> lck(mtx);
@@ -44,7 +47,8 @@ int main()
         unique_lock<mutex> lck(mtx);
 
         while(true){
-            accumulatedAverage = TemperatureNode::calculateAccumelatedTemperatureAverages(nodes);
+            accumulatedAverage = ApplicationHelper::calculateAccumelatedAverages(nodes);
+            accumulatedAverage = accumulatedAverage > 0.0 ? accumulatedAverage : 0.0;
             cout << "Accumulated Average of Nodes = " << accumulatedAverage << endl;
             cv.wait_for(lck,chrono::seconds(5));
         }
@@ -53,8 +57,8 @@ int main()
 
     while(true){
         socketConnection->serverResponse();
-        map<string, string> responsPayload = socketConnection->getPayload();
-        cout << "responsPayload" << responsPayload[ATTRIBUTE] << endl;
+        map<string, string> responsPayload = parser->parsePayloadToMap(",", ":", socketConnection->getPayload());
+
         string payloadIdentifire = responsPayload[IDENTIFIRE];
         bool isNodeFound = false;
         int sizeOfNodes = nodes.size();
@@ -63,7 +67,6 @@ int main()
                 isNodeFound = true;
                 nodes[i].setTemperature(atof(responsPayload[ATTRIBUTE].c_str()));
             }
-
         }
 
         if(!isNodeFound) {
@@ -83,20 +86,3 @@ int main()
     return 0;
 }
 
-void nodeConnectionHandler(string channel, string ip, int port) {
-    mutex mtx;
-    unique_lock<mutex> lck(mtx);
-    SocketConnection *socketConnection = socketConnection->getInestance();
-    socketConnection->setServerChannel(channel);
-    socketConnection->setServerIp(ip);
-    socketConnection->setServerPort(port);
-
-    int triersFlag = 0;
-    while(triersFlag < 5){
-        if(!socketConnection->establishConnection()){
-            triersFlag++;
-            cv.wait_for(lck,chrono::seconds(5));
-        }else break;
-    }
-    if(triersFlag == 5) cout << "The node with channel name : " << channel << " and ip with port : "<< ip << ":" << port << " is not available now" << endl;
-}

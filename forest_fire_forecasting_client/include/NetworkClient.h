@@ -2,6 +2,7 @@
 #define NETWORKCLIENT_H
 #include <map>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -10,11 +11,11 @@ class NetworkClient
      public:
         NetworkClient();
         virtual bool establishConnection() = 0;
-        map<string,string> getPayload();
-        void setPayload(map<string,string> payload);
+        string getPayload();
+        void setPayload(string payload);
 
     protected:
-        map<string,string> payload;
+        string payload;
 
     private:
 };

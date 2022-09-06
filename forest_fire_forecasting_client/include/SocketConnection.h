@@ -3,11 +3,17 @@
 #include "NetworkClient.h"
 #include <iostream>
 #include <string>
+#include <utility>
+#include <thread>
+#include <mutex>
+#include <chrono>
+#include <condition_variable>
 
 using namespace std;
 
 class SocketConnection : public NetworkClient {
     public:
+        mutex mtx;
         static SocketConnection* getInestance();
         virtual bool establishConnection();
         bool serverResponse();
@@ -17,6 +23,7 @@ class SocketConnection : public NetworkClient {
         void setServerChannel(string channel);
         void setServerPort(int port);
         void setServerIp(string ip);
+        void handelConnection(string channel, string ip, int port);
 
     protected:
 
@@ -27,8 +34,8 @@ class SocketConnection : public NetworkClient {
         string serverChannel;
         int serverPort;
         string serverIp;
-        SocketConnection();
         static SocketConnection *instance;
+        SocketConnection();
         void parseNetworkData(string handCheckData);
 };
 

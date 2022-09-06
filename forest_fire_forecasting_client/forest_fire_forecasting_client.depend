@@ -1,48 +1,52 @@
 # depslib dependency file v1.0
-1662416027 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/main.cpp
+1662494470 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/main.cpp
 	<iostream>
 	"TemperatureNode.h"
 	"NetworkClient.h"
 	"SocketConnection.h"
+	"IParser.h"
+	"RawDataParser.h"
+	"ApplicationHelper.h"
 	<vector>
 	<thread>
 	<mutex>
 	<chrono>
 	<condition_variable>
 
-1662235861 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/NetworkClient.cpp
+1662486502 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/NetworkClient.cpp
 	"NetworkClient.h"
-	<iostream>
 
-1662234895 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/NetworkClient.h
+1662486489 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/NetworkClient.h
 	<map>
 	<string>
+	<iostream>
 
-1662337075 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/TemperatureNode.cpp
+1662492871 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/TemperatureNode.cpp
 	"TemperatureNode.h"
 	"limits.h"
 	<cstdlib>
 	<iostream>
 
-1662336119 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/TemperatureNode.h
+1662492888 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/TemperatureNode.h
 	<string>
 	<vector>
 	<ctime>
 
-1662320903 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/SocketConnection.cpp
+1662494657 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/SocketConnection.cpp
 	"SocketConnection.h"
+	"../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
+
+1662494690 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/SocketConnection.h
 	"NetworkClient.h"
 	<iostream>
 	<string>
 	<utility>
-	"../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
+	<thread>
+	<mutex>
+	<chrono>
+	<condition_variable>
 
-1662316340 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/SocketConnection.h
-	"NetworkClient.h"
-	<iostream>
-	<string>
-
-1662404859 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
+1662493823 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/web-socket/easy-socket-master/include/masesk/EasySocket.hpp
 	<winsock2.h>
 	<Ws2tcpip.h>
 	<sys/socket.h>
@@ -56,4 +60,36 @@
 	<atomic>
 	<functional>
 	<exception>
+
+1662483856 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/ISensor.cpp
+	"ISensor.h"
+
+1662483856 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/ISensor.h
+
+1662486406 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/IParser.cpp
+	"IParser.h"
+
+1662486393 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/IParser.h
+	<utility>
+	<map>
+	<string>
+	<vector>
+
+1662486427 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/RawDataParser.cpp
+	"RawDataParser.h"
+
+1662486400 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/RawDataParser.h
+	<utility>
+	<map>
+	<string>
+	<vector>
+	"IParser.h"
+
+1662492830 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/src/ApplicationHelper.cpp
+	"ApplicationHelper.h"
+
+1662492632 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_client/include/ApplicationHelper.h
+	<ctime>
+	<vector>
+	"TemperatureNode.h"
 

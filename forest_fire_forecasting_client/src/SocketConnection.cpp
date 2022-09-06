@@ -1,8 +1,4 @@
 #include "SocketConnection.h"
-#include "NetworkClient.h"
-#include <iostream>
-#include <string>
-#include <utility>
 #include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
 #define CLIENT_CHANNEL "118"
 #define CLIENT_ID "118"
@@ -24,6 +20,7 @@ static void handleData(string &payloadData, const string &data) {
     payloadData = data;
 }
 
+//TODO
 string SocketConnection::getServerChannel(){ return serverChannel;}
 string SocketConnection::getServerIp(){ return serverIp;}
 int SocketConnection::getServerPort(){ return serverPort;}
@@ -59,7 +56,7 @@ bool SocketConnection::serverResponse(){
     try{
         string payloadData = "";
         socketManager.socketListen(channel, socketPort, &handleData, payloadData);
-        parseNetworkData(payloadData);
+        setPayload(payloadData);
         return true;
     }catch (string error){
         return false;
@@ -68,22 +65,26 @@ bool SocketConnection::serverResponse(){
     }
 }
 
-void SocketConnection::parseNetworkData(string payloadData){
-    map<string,string> payload;
-    string delim = ",";
-    string keyValyDelim = ":";
-    payloadData = payloadData.append(",");
+void SocketConnection::handelConnection(string channel, string ip, int port) {
+    condition_variable cv;
+    unique_lock<mutex> lck(mtx);
+    this->setServerChannel(channel);
+    this->setServerIp(ip);
+    this->setServerPort(port);
 
-    size_t pos = 0;
-    string tempString; // define a string variable
-
-    while (( pos = payloadData.find (delim)) != std::string::npos)  {
-        tempString = payloadData.substr(0, pos); // store the substring
-        int delimLocation = payloadData.find(keyValyDelim);
-        payload.insert({tempString.substr(0, delimLocation), tempString.substr(delimLocation + 1, tempString.length())});
-        //cout << tempString << endl;
-        payloadData.erase(0, pos + delim.length());
+    int triersFlag = 0;
+    while(triersFlag < 5){
+        cout<< "Cooncting ...." << endl;
+        if(!this->establishConnection()){
+            cout<< "Retry to connect with server : " << ip << ":" << port<< endl;
+            triersFlag++;
+            cv.wait_for(lck,chrono::seconds(5));
+        }else {
+            cout<< "Cooncted to server : " << ip << ":" << port << endl;
+            break;
+        }
     }
-    setPayload(payload);
+    if(triersFlag == 5) cout << "The node with channel name : " << channel << " and ip with port : "<< ip << ":" << port << " is not available now" << endl;
 }
+
 

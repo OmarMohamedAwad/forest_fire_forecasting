@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1662420286 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensor.cpp
+1662420512 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/TemperatureSensor.cpp
 	"TemperatureSensor.h"
 
 1662416582 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/TemperatureSensor.h
@@ -11,7 +11,7 @@
 	<chrono>
 	<condition_variable>
 
-1662420221 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
+1662483527 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/main.cpp
 	<iostream>
 	"limits.h"
 	"TemperatureSensor.h"
@@ -35,7 +35,7 @@
 1662420380 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/NetworkServer.cpp
 	"NetworkServer.h"
 
-1662420453 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
+1662486928 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/SocketConnection.cpp
 	"SocketConnection.h"
 
 1662420466 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/SocketConnection.h
@@ -93,15 +93,19 @@
 	<functional>
 	<exception>
 
-1662420162 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/IParser.cpp
+1662483741 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/IParser.cpp
 	"IParser.h"
 
-1662418579 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/IParser.h
+1662483739 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/IParser.h
+	<utility>
+	<map>
+	<string>
+	<vector>
 
-1662420295 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/RawDataParser.cpp
+1662483482 source:/home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/src/RawDataParser.cpp
 	"RawDataParser.h"
 
-1662419703 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/RawDataParser.h
+1662483348 /home/omar-awad/Desktop/Dell/forest_fire_forecasting/forest_fire_forecasting_server/include/RawDataParser.h
 	<utility>
 	<map>
 	<string>

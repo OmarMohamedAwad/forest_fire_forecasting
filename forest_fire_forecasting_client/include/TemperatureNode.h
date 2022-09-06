@@ -20,8 +20,7 @@ class TemperatureNode
         string getTempertureNodeId();
         void setTempertureNodeId(string nodeId);
         void setTempertureTimestamp();
-        static float calculateAccumelatedTemperatureAverages(vector<TemperatureNode> &nodes);
-        static bool comparTimestampWithNow(tm temperatureTimestamp);
+        tm getTempertureTimestamp();
 
     protected:
 

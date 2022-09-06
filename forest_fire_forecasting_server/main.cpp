@@ -13,14 +13,11 @@
 #include <condition_variable>
 #include <utility>
 #include <gtest/gtest.h>
-#define SERIAL_NUMBER "29.88.67.12"
+#define SERIAL_NUMBER "29.88.67.11"
 
 using namespace std;
 
 std::condition_variable cv;
-
-
-pair<string,string> parseNetworkElement(string networkData);
 
 
 int main(int argc, char **argv)
@@ -30,7 +27,7 @@ int main(int argc, char **argv)
 
     TemperatureSensor temperatureSensor = TemperatureSensor();
     SocketConnection* socketConnection = socketConnection->getInestance();
-    RawDataParser* parser = new RawDataParser();
+    IParser* parser = new RawDataParser();
 
     thread sendDataToClientsThread([&]() {
         float temp;
@@ -46,7 +43,7 @@ int main(int argc, char **argv)
 
             cout << "in while" << endl;
             for (auto it = clientsData.cbegin(); it != clientsData.cend(); ){
-                pair<string,string> parsedElement = parser->parseRawDataToPair(":",it->second);
+                pair<string,string> parsedElement = parser->parsePayloadToPair(":",it->second);
                 if(socketConnection->sendPayload(4, it->first, parsedElement.first, parsedElement.second, payload))
                     ++it;
                 else
@@ -61,7 +58,7 @@ int main(int argc, char **argv)
 
     while(true){
         if(socketConnection->establishConnection()){
-            pair<string, string> socketDataPair =  parser->parseRawDataToPair(",", socketConnection->getData());
+            pair<string, string> socketDataPair =  parser->parsePayloadToPair(",", socketConnection->getData());
             clientsData.insert({socketDataPair.first, socketDataPair.second});
         }
     }

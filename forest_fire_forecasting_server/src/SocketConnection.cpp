@@ -1,13 +1,16 @@
 #include "SocketConnection.h"
+#define SERVER_CHANNEL "brodcast"
+#define SERVER_PORT 8010
+#define SERVER_IP "127.0.0.1"
 
 using namespace masesk;
 
 SocketConnection *SocketConnection::instance = nullptr;
 
 SocketConnection::SocketConnection(){
-    channel = "brodcast2";
-    socketPort = 8020;
-    socketIp = "127.0.0.1";
+    channel = SERVER_CHANNEL;
+    socketPort = SERVER_PORT;
+    socketIp = SERVER_IP;
 }
 
 static void handleData(string &handCheckData, const string &data) {

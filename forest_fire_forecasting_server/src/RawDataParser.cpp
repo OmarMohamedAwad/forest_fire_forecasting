@@ -6,11 +6,11 @@ RawDataParser::RawDataParser()
 }
 
 
-map<string,string> RawDataParser::parseRawDataToMap(string delimiter, string rawData){
+map<string,string> RawDataParser::parsePayloadToMap(string delimiter, string rawData){
 
 }
 
-pair<string,string> RawDataParser::parseRawDataToPair(string delimiter, string rawData){
+pair<string,string> RawDataParser::parsePayloadToPair(string delimiter, string rawData){
     pair<string,string> parsedPair;
     string delim = delimiter;
     int delimLocation = rawData.find(delim);
@@ -21,6 +21,6 @@ pair<string,string> RawDataParser::parseRawDataToPair(string delimiter, string r
     return parsedPair;
 }
 
-vector<string> RawDataParser::parseRawDataToVector(string delimiter, string rawData){
+vector<string> RawDataParser::parsePayloadToVector(string delimiter, string rawData){
 
 }

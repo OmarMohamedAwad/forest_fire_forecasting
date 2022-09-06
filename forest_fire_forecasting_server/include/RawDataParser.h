@@ -13,9 +13,9 @@ class RawDataParser : public IParser
 {
     public:
         RawDataParser();
-        map<string,string> parseRawDataToMap(string delimiter, string rawData);
-        pair<string,string> parseRawDataToPair(string delimiter, string rawData);
-        vector<string> parseRawDataToVector(string delimiter, string rawData);
+        virtual map<string,string> parsePayloadToMap(string delimiter, string rawData);
+        virtual pair<string,string> parsePayloadToPair(string delimiter, string rawData);
+        virtual vector<string> parsePayloadToVector(string delimiter, string rawData);
 
     protected:
 

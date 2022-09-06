@@ -82,10 +82,12 @@ namespace masesk {
 			if (getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
 			{
 				//std::cout << host << " connected on port " << service << std::endl;
+				// std::cout << host << " connecting... " << std::endl;
 			}
 			else
 			{
 				inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+				// std::cout << host << " connected on server " << std::endl;
 				//std::cout << host << " connected on port " <<
 				//	ntohs(client.sin_port) << std::endl;
 			}
