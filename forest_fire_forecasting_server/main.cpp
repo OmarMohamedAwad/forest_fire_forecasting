@@ -1,10 +1,10 @@
 #include <iostream>
 #include "limits.h"
-#include "TemperatureSensor.h"
-#include "NetworkServer.h"
-#include "SocketConnection.h"
-#include "IParser.h"
-#include "RawDataParser.h"
+#include "./include/TemperatureSensor.h"
+#include "./include/NetworkServer.h"
+#include "./include/SocketConnection.h"
+#include "./include/IParser.h"
+#include "./include/RawDataParser.h"
 #include <map>
 #include <string>
 #include <thread>
@@ -14,7 +14,7 @@
 #include <utility>
 #include <gtest/gtest.h>
 #define SERIAL_NUMBER "29.88.67.11"
-#define TEST_OR_BUILD 1// 1 for Test - 0 for build
+#define TEST_OR_BUILD 0// 1 for Test - 0 for build
 
 using namespace std;
 
@@ -23,12 +23,12 @@ std::condition_variable cv;
 
 int main(int argc, char **argv)
 {
-    #if TEST_OR_BUILD
+    #if TEST_OR_BUILD == 1
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
     #else
     map<string, string> clientsData;
-
+    int x = 2;
     TemperatureSensor temperatureSensor = TemperatureSensor();
     SocketConnection* socketConnection = socketConnection->getInestance();
     IParser* parser = new RawDataParser();
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
             payload = "Serial:";
             payload = payload.append(SERIAL_NUMBER).append(",Temperature:").append(to_string(temp));
 
-            cout << "in while" << endl;
+            cout << "Waitting for New Clients" << endl;
             for (auto it = clientsData.cbegin(); it != clientsData.cend(); ){
                 pair<string,string> parsedElement = parser->parsePayloadToPair(":",it->second);
                 if(socketConnection->sendPayload(4, it->first, parsedElement.first, parsedElement.second, payload))

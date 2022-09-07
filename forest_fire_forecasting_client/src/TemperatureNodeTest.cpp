@@ -1,4 +1,4 @@
-#include "TemperatureNodeTest.h"
+#include "../include/TemperatureNodeTest.h"
 
 TemperatureNodeTest::TemperatureNodeTest()
 {

@@ -1,4 +1,4 @@
-#include "SocketConnection.h"
+#include "../include/SocketConnection.h"
 #include "../../web-socket/easy-socket-master/include/masesk/EasySocket.hpp"
 #define CLIENT_CHANNEL "118"
 #define CLIENT_ID "118"

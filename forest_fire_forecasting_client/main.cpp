@@ -1,17 +1,17 @@
 #include <iostream>
-#include "TemperatureNode.h"
-#include "NetworkClient.h"
-#include "SocketConnection.h"
-#include "IParser.h"
-#include "RawDataParser.h"
-#include "ApplicationHelper.h"
+#include "./include/TemperatureNode.h"
+#include "./include/NetworkClient.h"
+#include "./include/SocketConnection.h"
+#include "./include/IParser.h"
+#include "./include/RawDataParser.h"
+#include "./include/ApplicationHelper.h"
 #include <vector>
 #include <thread>
 #include <mutex>
 #include <chrono>
 #include <gtest/gtest.h>
 #include <condition_variable>
-#define TEST_OR_BUILD 1// 1 for Test - 0 for build
+#define TEST_OR_BUILD 0// 1 for Test - 0 for build
 
 
 #define IDENTIFIRE "Serial"
@@ -23,7 +23,7 @@ std::condition_variable cv;
 int main(int argc, char **argv)
 {
 
-    #if TEST_OR_BUILD
+    #if TEST_OR_BUILD == 1
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
     #else

@@ -1,4 +1,4 @@
-#include "ISensor.h"
+#include "../include/ISensor.h"
 
 ISensor::ISensor()
 {

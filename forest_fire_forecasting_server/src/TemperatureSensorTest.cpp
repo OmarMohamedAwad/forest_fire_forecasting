@@ -1,4 +1,4 @@
-#include "TemperatureSensorTest.h"
+#include "../include/TemperatureSensorTest.h"
 
 TemperatureSensorTest::TemperatureSensorTest()
 {

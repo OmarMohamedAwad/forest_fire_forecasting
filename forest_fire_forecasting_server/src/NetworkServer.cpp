@@ -1,4 +1,4 @@
-#include "NetworkServer.h"
+#include "../include/NetworkServer.h"
 
    NetworkServer::NetworkServer(){
    }

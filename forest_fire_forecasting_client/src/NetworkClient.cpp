@@ -1,4 +1,4 @@
-#include "NetworkClient.h"
+#include "../include/NetworkClient.h"
 
 
    NetworkClient::NetworkClient(){}

@@ -1,4 +1,4 @@
-#include "SocketConnection.h"
+#include "../include/SocketConnection.h"
 #define SERVER_CHANNEL "brodcast"
 #define SERVER_PORT 8010
 #define SERVER_IP "127.0.0.1"

@@ -1,4 +1,4 @@
-#include "TemperatureSensor.h"
+#include "../include/TemperatureSensor.h"
 
     TemperatureSensor::TemperatureSensor(){
         temperatureCounter = 0;

@@ -1,4 +1,4 @@
-#include "TemperatureNode.h"
+#include "../include/TemperatureNode.h"
 #include "limits.h"
 #include <cstdlib>
 #include <iostream>
