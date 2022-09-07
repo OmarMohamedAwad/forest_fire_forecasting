@@ -38,14 +38,32 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-pthread" />
+			<Add option="-lgtest" />
 		</Compiler>
+		<Linker>
+			<Add option="-pthread" />
+			<Add option="-lgtest" />
+		</Linker>
+		<Unit filename="forest_fire_forecasting_client.depend" />
+		<Unit filename="forest_fire_forecasting_client.layout" />
+		<Unit filename="include/ApplicationHelper.h" />
+		<Unit filename="include/IParser.h" />
+		<Unit filename="include/ISensor.h" />
 		<Unit filename="include/NetworkClient.h" />
+		<Unit filename="include/RawDataParser.h" />
 		<Unit filename="include/SocketConnection.h" />
 		<Unit filename="include/TemperatureNode.h" />
+		<Unit filename="include/TemperatureNodeTest.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ApplicationHelper.cpp" />
+		<Unit filename="src/IParser.cpp" />
+		<Unit filename="src/ISensor.cpp" />
 		<Unit filename="src/NetworkClient.cpp" />
+		<Unit filename="src/RawDataParser.cpp" />
 		<Unit filename="src/SocketConnection.cpp" />
 		<Unit filename="src/TemperatureNode.cpp" />
+		<Unit filename="src/TemperatureNodeTest.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

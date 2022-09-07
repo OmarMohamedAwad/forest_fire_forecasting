@@ -28,3 +28,16 @@ The client shall print the calculations each 5 seconds.
 2. The client calculates the average temperature based on the last five reading to ensure the data is valid and make sense.
 3. The client calculates the accumulated temperature based on the number of sensors connected.
 
+## System Design
+<img src="document/readme/System Design-System Design.png">
+
+## System Components
+<img src="document/readme/System Componants.png">
+
+## System Implementation
+**Server Class Digram**
+<img src="document/readme/Class Digram-Server.png">
+
+**Client Class Digram**
+<img src="document/readme/Class Digram-Client.png">
+
